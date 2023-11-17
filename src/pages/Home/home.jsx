@@ -1,9 +1,13 @@
+import Description from "../../components/Description/description";
+import Features from "../../components/Features/features";
+
 function Home() {
-    return (
-        <div>
-            <p>Content</p>
-        </div>
-    );
+  return (
+    <main>
+      <Description />
+      <Features />
+    </main>
+  );
 }
 
 export default Home;
