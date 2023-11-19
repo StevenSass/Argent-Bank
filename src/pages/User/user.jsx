@@ -13,6 +13,11 @@ function User() {
       </div>
       <h2 className="sr-only">Accounts</h2>
       <CardBank />
+      <CardBank />
+      <CardBank />
+      <CardBank />
+      <CardBank />
+      <CardBank />
     </main>
   );
 }
