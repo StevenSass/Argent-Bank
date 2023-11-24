@@ -24,6 +24,10 @@ function Profile() {
     setIsOpen((prevIsOpen) => !prevIsOpen);
   }
 
+  function toggleModal() {
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+  }
+
   return (
     <main className="main bg-dark">
       <div className="header">
