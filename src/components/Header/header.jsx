@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 import Logo from "../../img/argentBankLogo.png";
-import { isEmpty } from "../../utils/isEmpty";
+import { isEmpty } from "../UTILS/isEmpty";
 import { useDispatch, useSelector } from "react-redux";
-import { tokenUser } from "../../actions/token.action";
+import { logout } from "../../redux/reducers/authSlice";
 
 function Header() {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.tokenReducer);
-  const userInfo = useSelector((state) => state.userReducer.body);
+  const token =
+    useSelector((state) => state.auth.token) || localStorage.getItem("token");
+  const userInfo = useSelector((state) => state.user.information);
 
-  function logout() {
-    dispatch(tokenUser(null));
-    localStorage.removeItem("token");
+  function handleLogout() {
+    dispatch(logout(token));
   }
 
   return (
@@ -25,7 +25,7 @@ function Header() {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div>
-        {isEmpty(token) ? (
+        {isEmpty(token) || token == "undefined" ? (
           <Link to="/login" className="main-nav-item">
             <i className="fa fa-user-circle"></i>
             Sign In
@@ -33,11 +33,10 @@ function Header() {
         ) : (
           <>
             <Link to="/profile" className="main-nav-item">
-              <i className="fa fa-user-circle"></i>
-              {userInfo?.firstName} {userInfo?.lastName}
+              <i className="fa fa-user-circle"></i> {userInfo?.userName}
             </Link>
-            <Link to="/" className="main-nav-item" onClick={logout}>
-              <i className="fa fa-user-circle"></i> logout
+            <Link to="/" className="main-nav-item" onClick={handleLogout}>
+              <i className="fa fa-user-circle"></i> Logout
             </Link>
           </>
         )}

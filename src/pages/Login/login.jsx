@@ -1,13 +1,13 @@
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
-import { getUser } from "../../actions/login.action";
-
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getUser, login } from "../../redux/reducers/asyncThunk";
+import { isEmpty } from "../../components/UTILS/isEmpty";
 
 function Login() {
-  const navigate = useNavigate();
-  const loginForm = useRef();
   const dispatch = useDispatch();
+  const loginForm = useRef();
+  const navigate = useNavigate();
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -16,18 +16,13 @@ function Login() {
       password: loginForm.current[1].value,
     };
 
-    try {
-      await dispatch(getUser(data));
-      loginForm.current.reset();
-      navigate("/profile");
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        alert("Identifiant ou mot de passe incorrect");
-      } else {
-        console.error("Erreur non traitée:", error);
-        alert("Une erreur s'est produite lors de la connexion");
+    await dispatch(login(data)).then((response) => {
+      const token = response.payload?.body.token;
+      if (!isEmpty(token)) {
+        navigate("/profile");
       }
-    }
+    });
+    loginForm.current.reset();
   };
 
   return (
@@ -36,7 +31,7 @@ function Login() {
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
         <form ref={loginForm} onSubmit={(e) => handleForm(e)}>
-          <div className="input-wrapper">
+          <div className="input-wrapper ">
             <label htmlFor="username">Username</label>
             <input type="text" id="username" />
           </div>
