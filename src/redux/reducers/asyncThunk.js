@@ -26,8 +26,25 @@ export const getUser = createAsyncThunk("user",
       },
     };
     try {
-      
       const response = await axios.post("http://localhost:3001/api/v1/user/profile", {}, config);
+      return response.data.body;
+    } catch (error) {
+      throw error
+    }
+  }
+);
+
+export const putUser = createAsyncThunk("modifiedUser",
+  async (data) => {
+    console.log(data.postData);
+    console.log(data.token);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${data.token}`,
+      },
+    };
+    try {
+      const response = await axios.put("http://localhost:3001/api/v1/user/profile", data.postData, config);
       return response.data.body;
     } catch (error) {
       throw error

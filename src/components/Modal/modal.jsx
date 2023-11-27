@@ -1,14 +1,21 @@
-import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { putUser } from "../../redux/reducers/asyncThunk";
 
 function Modal(isOpen) {
   const userInfo = useSelector((state) => state.user.information);
+  const token = useSelector((state) => state.auth.token);
   const formModal = useRef();
+  const dispatch = useDispatch();
 
   async function handleFormModal(e) {
     e.preventDefault();
-    console.log(formModal);
-    await formModal.current.reset();
+    const postData = { userName: formModal.current[0].value };
+    try {
+      dispatch(putUser({ postData, token }));
+    } catch (error) {
+      console.log("une erreur es survenue :" + error);
+    }
   }
 
   return (
