@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Logo from "../../img/argentBankLogo.png";
+import Logo from "../../img/Images Compressed/argentBankLogo.webp";
 import { isEmpty } from "../UTILS/isEmpty";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/reducers/authSlice";

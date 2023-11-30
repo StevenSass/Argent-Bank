@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getUser, login } from "../../redux/reducers/asyncThunk";
+import { login } from "../../redux/reducers/asyncThunk";
 import { isEmpty } from "../../components/UTILS/isEmpty";
 
 function Login() {

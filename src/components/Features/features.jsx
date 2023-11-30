@@ -1,6 +1,6 @@
-import iconChat from "../../img/icon-chat.png";
-import iconMoney from "../../img/icon-money.png";
-import iconSecurity from "../../img//icon-security.png";
+import iconChat from "../../img/Images Compressed/icon-chat.webp";
+import iconMoney from "../../img/Images Compressed/icon-money.webp";
+import iconSecurity from "../../img/Images Compressed/icon-security.webp";
 import FeaturesCard from "../FeaturesCard/FeaturesCard";
 
 function Features() {
