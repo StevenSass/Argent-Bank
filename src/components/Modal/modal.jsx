@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { putUser } from "../../redux/reducers/asyncThunk";
+import { getUser, putUser } from "../../redux/reducers/asyncThunk";
 
 function Modal(isOpen) {
   const userInfo = useSelector((state) => state.user.information);
@@ -15,6 +15,8 @@ function Modal(isOpen) {
       dispatch(putUser({ postData, token }));
     } catch (error) {
       console.log("une erreur es survenue :" + error);
+    } finally {
+      dispatch(getUser(token));
     }
   }
 

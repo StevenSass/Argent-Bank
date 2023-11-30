@@ -36,8 +36,6 @@ export const getUser = createAsyncThunk("user",
 
 export const putUser = createAsyncThunk("modifiedUser",
   async (data) => {
-    console.log(data.postData);
-    console.log(data.token);
     const config = {
       headers: {
         Authorization: `Bearer ${data.token}`,
